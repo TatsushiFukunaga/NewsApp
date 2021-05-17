@@ -62,13 +62,13 @@
 			children = (
 				B2AF569C264FA0AB00F886B9 /* AppDelegate.swift */,
 				B2AF569E264FA0AB00F886B9 /* SceneDelegate.swift */,
+				B2AF56B0264FA14800F886B9 /* APICaller.swift */,
 				B2AF56A0264FA0AB00F886B9 /* ViewController.swift */,
+				B2AF56B2264FADB900F886B9 /* NewsTableViewCell.swift */,
 				B2AF56A2264FA0AB00F886B9 /* Main.storyboard */,
 				B2AF56A5264FA0AD00F886B9 /* Assets.xcassets */,
 				B2AF56A7264FA0AD00F886B9 /* LaunchScreen.storyboard */,
 				B2AF56AA264FA0AD00F886B9 /* Info.plist */,
-				B2AF56B0264FA14800F886B9 /* APICaller.swift */,
-				B2AF56B2264FADB900F886B9 /* NewsTableViewCell.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";

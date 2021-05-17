@@ -17,6 +17,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return table
     }()
     
+    var languageChangeButton: UIBarButtonItem!
+    
     private let searchVC = UISearchController(searchResultsController: nil)
     
     private var articles = [Article]()
@@ -33,6 +35,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.backgroundColor = .systemBackground
         fetchTopStories()
         createSearchBar()
+        
+        languageChangeButton = UIBarButtonItem(title: "Spanish", style: .done, target: self, action: #selector(languageChangeButtonTapped(_:)))
+        self.navigationItem.rightBarButtonItem = languageChangeButton
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,8 +50,83 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchVC.searchBar.delegate = self
     }
     
+    @objc func languageChangeButtonTapped(_ sender: UIBarButtonItem) {
+        if languageChangeButton.title == "Spanish" {
+            APICaller.shared.getTopStoriesInOtherLanguage(with: "es") { [weak self] result in
+                switch result {
+                case .success(let articles):
+                    self?.articles = articles
+                    self?.viewModels = articles.compactMap({
+                        NewsTableViewCellViewModel(title: $0.title,
+                                                   subtitle: $0.description ?? "No Description",
+                                                   imageURL: URL(string: $0.urlToImage ?? ""))
+                    })
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            languageChangeButton.title = "French"
+        }
+        else if languageChangeButton.title == "English" {
+            APICaller.shared.getTopStoriesInOtherLanguage(with: "en") { [weak self] result in
+                switch result {
+                case .success(let articles):
+                    self?.articles = articles
+                    self?.viewModels = articles.compactMap({
+                        NewsTableViewCellViewModel(title: $0.title,
+                                                   subtitle: $0.description ?? "No Description",
+                                                   imageURL: URL(string: $0.urlToImage ?? ""))
+                    })
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            languageChangeButton.title = "Spanish"
+        }
+        else if languageChangeButton.title == "French" {
+            APICaller.shared.getTopStoriesInOtherLanguage(with: "fr") { [weak self] result in
+                switch result {
+                case .success(let articles):
+                    self?.articles = articles
+                    self?.viewModels = articles.compactMap({
+                        NewsTableViewCellViewModel(title: $0.title,
+                                                   subtitle: $0.description ?? "No Description",
+                                                   imageURL: URL(string: $0.urlToImage ?? ""))
+                    })
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            languageChangeButton.title = "English"
+        }
+    }
+    
     private func fetchTopStories() {
-        APICaller.shared.getTopStories { [weak self] result in
+        //        APICaller.shared.getTopStories { [weak self] result in
+        //            switch result {
+        //            case .success(let articles):
+        //                self?.articles = articles
+        //                self?.viewModels = articles.compactMap({
+        //                    NewsTableViewCellViewModel(title: $0.title,
+        //                                               subtitle: $0.description ?? "No Description",
+        //                                               imageURL: URL(string: $0.urlToImage ?? ""))
+        //                })
+        //                DispatchQueue.main.async {
+        //                    self?.tableView.reloadData()
+        //                }
+        //            case .failure(let error):
+        //                print(error)
+        //            }
+        APICaller.shared.getTopStoriesInOtherLanguage(with: "en") { [weak self] result in
             switch result {
             case .success(let articles):
                 self?.articles = articles
@@ -113,6 +193,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print(error)
             }
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchTopStories()
     }
     
 }
