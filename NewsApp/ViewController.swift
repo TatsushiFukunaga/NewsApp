@@ -176,23 +176,81 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
         
-        APICaller.shared.search(with: text) { [weak self] result in
-            switch result {
-            case .success(let articles):
-                self?.articles = articles
-                self?.viewModels = articles.compactMap({
-                    NewsTableViewCellViewModel(title: $0.title,
-                                               subtitle: $0.description ?? "No Description",
-                                               imageURL: URL(string: $0.urlToImage ?? ""))
-                })
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                    self?.searchVC.dismiss(animated: true, completion: nil)
+//        APICaller.shared.search(with: text) { [weak self] result in
+//            switch result {
+//            case .success(let articles):
+//                self?.articles = articles
+//                self?.viewModels = articles.compactMap({
+//                    NewsTableViewCellViewModel(title: $0.title,
+//                                               subtitle: $0.description ?? "No Description",
+//                                               imageURL: URL(string: $0.urlToImage ?? ""))
+//                })
+//                DispatchQueue.main.async {
+//                    self?.tableView.reloadData()
+//                    self?.searchVC.dismiss(animated: true, completion: nil)
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        if languageChangeButton.title == "Spanish" {
+            APICaller.shared.searchInOtherLanguage(with: "en", with: text) { [weak self] result in
+                switch result {
+                case .success(let articles):
+                    self?.articles = articles
+                    self?.viewModels = articles.compactMap({
+                        NewsTableViewCellViewModel(title: $0.title,
+                                                   subtitle: $0.description ?? "No Description",
+                                                   imageURL: URL(string: $0.urlToImage ?? ""))
+                    })
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                        self?.searchVC.dismiss(animated: true, completion: nil)
+                    }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
             }
         }
+        else if languageChangeButton.title == "French" {
+            APICaller.shared.searchInOtherLanguage(with: "es", with: text) { [weak self] result in
+                switch result {
+                case .success(let articles):
+                    self?.articles = articles
+                    self?.viewModels = articles.compactMap({
+                        NewsTableViewCellViewModel(title: $0.title,
+                                                   subtitle: $0.description ?? "No Description",
+                                                   imageURL: URL(string: $0.urlToImage ?? ""))
+                    })
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                        self?.searchVC.dismiss(animated: true, completion: nil)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        else if languageChangeButton.title == "English" {
+            APICaller.shared.searchInOtherLanguage(with: "fr", with: text) { [weak self] result in
+                switch result {
+                case .success(let articles):
+                    self?.articles = articles
+                    self?.viewModels = articles.compactMap({
+                        NewsTableViewCellViewModel(title: $0.title,
+                                                   subtitle: $0.description ?? "No Description",
+                                                   imageURL: URL(string: $0.urlToImage ?? ""))
+                    })
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                        self?.searchVC.dismiss(animated: true, completion: nil)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
