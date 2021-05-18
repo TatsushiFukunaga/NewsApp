@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B220EAEE2653C978002600BC /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B220EAED2653C978002600BC /* Models.swift */; };
 		B2AF569D264FA0AB00F886B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF569C264FA0AB00F886B9 /* AppDelegate.swift */; };
 		B2AF569F264FA0AB00F886B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF569E264FA0AB00F886B9 /* SceneDelegate.swift */; };
 		B2AF56A1264FA0AB00F886B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AF56A0264FA0AB00F886B9 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B220EAED2653C978002600BC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		B2AF5699264FA0AB00F886B9 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2AF569C264FA0AB00F886B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2AF569E264FA0AB00F886B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				B2AF569C264FA0AB00F886B9 /* AppDelegate.swift */,
 				B2AF569E264FA0AB00F886B9 /* SceneDelegate.swift */,
+				B220EAED2653C978002600BC /* Models.swift */,
 				B2AF56B0264FA14800F886B9 /* APICaller.swift */,
 				B2AF56A0264FA0AB00F886B9 /* ViewController.swift */,
 				B2AF56B2264FADB900F886B9 /* NewsTableViewCell.swift */,
@@ -146,6 +149,7 @@
 				B2AF56A1264FA0AB00F886B9 /* ViewController.swift in Sources */,
 				B2AF569D264FA0AB00F886B9 /* AppDelegate.swift in Sources */,
 				B2AF56B3264FADB900F886B9 /* NewsTableViewCell.swift in Sources */,
+				B220EAEE2653C978002600BC /* Models.swift in Sources */,
 				B2AF569F264FA0AB00F886B9 /* SceneDelegate.swift in Sources */,
 				B2AF56B1264FA14800F886B9 /* APICaller.swift in Sources */,
 			);

@@ -26,7 +26,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         title = "News"
         view.addSubview(tableView)
@@ -52,7 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @objc func languageChangeButtonTapped(_ sender: UIBarButtonItem) {
         if languageChangeButton.title == "Spanish" {
-            APICaller.shared.getTopStoriesInOtherLanguage(with: "es") { [weak self] result in
+            APICaller.shared.getTopStories(with: "es") { [weak self] result in
                 switch result {
                 case .success(let articles):
                     self?.articles = articles
@@ -71,7 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             languageChangeButton.title = "French"
         }
         else if languageChangeButton.title == "English" {
-            APICaller.shared.getTopStoriesInOtherLanguage(with: "en") { [weak self] result in
+            APICaller.shared.getTopStories(with: "en") { [weak self] result in
                 switch result {
                 case .success(let articles):
                     self?.articles = articles
@@ -90,7 +89,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             languageChangeButton.title = "Spanish"
         }
         else if languageChangeButton.title == "French" {
-            APICaller.shared.getTopStoriesInOtherLanguage(with: "fr") { [weak self] result in
+            APICaller.shared.getTopStories(with: "fr") { [weak self] result in
                 switch result {
                 case .success(let articles):
                     self?.articles = articles
@@ -111,22 +110,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     private func fetchTopStories() {
-        //        APICaller.shared.getTopStories { [weak self] result in
-        //            switch result {
-        //            case .success(let articles):
-        //                self?.articles = articles
-        //                self?.viewModels = articles.compactMap({
-        //                    NewsTableViewCellViewModel(title: $0.title,
-        //                                               subtitle: $0.description ?? "No Description",
-        //                                               imageURL: URL(string: $0.urlToImage ?? ""))
-        //                })
-        //                DispatchQueue.main.async {
-        //                    self?.tableView.reloadData()
-        //                }
-        //            case .failure(let error):
-        //                print(error)
-        //            }
-        APICaller.shared.getTopStoriesInOtherLanguage(with: "en") { [weak self] result in
+        APICaller.shared.getTopStories(with: "en") { [weak self] result in
             switch result {
             case .success(let articles):
                 self?.articles = articles
@@ -176,25 +160,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
         
-//        APICaller.shared.search(with: text) { [weak self] result in
-//            switch result {
-//            case .success(let articles):
-//                self?.articles = articles
-//                self?.viewModels = articles.compactMap({
-//                    NewsTableViewCellViewModel(title: $0.title,
-//                                               subtitle: $0.description ?? "No Description",
-//                                               imageURL: URL(string: $0.urlToImage ?? ""))
-//                })
-//                DispatchQueue.main.async {
-//                    self?.tableView.reloadData()
-//                    self?.searchVC.dismiss(animated: true, completion: nil)
-//                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
         if languageChangeButton.title == "Spanish" {
-            APICaller.shared.searchInOtherLanguage(with: "en", with: text) { [weak self] result in
+            APICaller.shared.search(with: "en", with: text) { [weak self] result in
                 switch result {
                 case .success(let articles):
                     self?.articles = articles
@@ -213,7 +180,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         else if languageChangeButton.title == "French" {
-            APICaller.shared.searchInOtherLanguage(with: "es", with: text) { [weak self] result in
+            APICaller.shared.search(with: "es", with: text) { [weak self] result in
                 switch result {
                 case .success(let articles):
                     self?.articles = articles
@@ -232,7 +199,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         else if languageChangeButton.title == "English" {
-            APICaller.shared.searchInOtherLanguage(with: "fr", with: text) { [weak self] result in
+            APICaller.shared.search(with: "fr", with: text) { [weak self] result in
                 switch result {
                 case .success(let articles):
                     self?.articles = articles
